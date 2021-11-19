@@ -22,11 +22,11 @@ public class LoginController {
         users.put("kalle", new User("kalle", passwordService.hashPassword("password", salt).get(), salt));
     }
 
-    public boolean login(String userName, String password) throws InvalidLoginException {
+    public Token login(String userName, String password) throws InvalidLoginException {
         if (users.get(userName) != null) {
             User user = users.get(userName);
             if(passwordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
-                return true;
+                return new Token();
             }
         }
         throw new InvalidLoginException();

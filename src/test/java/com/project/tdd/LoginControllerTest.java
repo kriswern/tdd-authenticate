@@ -1,6 +1,5 @@
 package com.project.tdd;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    void test_password_service_not_null(){
+    void test_password_service_not_null() {
         assertNotNull(loginController.getPasswordService());
     }
 
@@ -36,17 +35,18 @@ public class LoginControllerTest {
 
     @ParameterizedTest
     @CsvSource({"anna, losen", "kalle, password", "berit, 123456"})
-    void test_login_success() throws InvalidLoginException { //Read about @SneakyThrows
+    void test_login_success(String username, String password) throws InvalidLoginException { //Read about @SneakyThrows
         assertNotNull(loginController);
 
-        assertTrue(loginController.login("anna", "losen"));
+        Token token = loginController.login(username, password);
+        assertNotNull(token);
     }
 
     @ParameterizedTest
     @CsvSource({"anna, password", "berit, password", "kalle, losen"})
     void test_login_fail(String username, String password) {
         InvalidLoginException invalidLoginException = assertThrows(InvalidLoginException.class, () ->
-                loginController.login("anna", "password"));
+                loginController.login(username, password));
 
         assertEquals("Wrong username or password", invalidLoginException.getMessage());
     }
