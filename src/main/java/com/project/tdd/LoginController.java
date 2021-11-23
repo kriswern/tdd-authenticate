@@ -23,10 +23,10 @@ public class LoginController {
     }
 
     public Token login(String userName, String password) throws InvalidLoginException {
-        if (users.get(userName) != null) {
+        if (users.containsKey(userName)) {
             User user = users.get(userName);
             if(passwordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
-                return new Token();
+                return new Token(user.getUserName());
             }
         }
         throw new InvalidLoginException();

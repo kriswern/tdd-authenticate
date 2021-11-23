@@ -13,7 +13,7 @@ public class TokenServiceTest {
     TokenService tokenService;
 
     @BeforeEach
-    void setUp() {
+    void setUp_tokenService() {
         tokenService = new TokenService();
     }
 
@@ -21,7 +21,7 @@ public class TokenServiceTest {
     void test_validate_token_success() {
         assertNotNull(tokenService);
 
-        Token token = new Token();
+        Token token = new Token("anna");
         assertNotNull(token);
 
         assertTrue(tokenService.validateToken(token));
