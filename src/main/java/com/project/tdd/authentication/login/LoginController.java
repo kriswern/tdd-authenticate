@@ -1,5 +1,6 @@
-package com.project.tdd;
+package com.project.tdd.authentication.login;
 
+import com.project.tdd.authentication.token.Token;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -8,9 +9,9 @@ import java.util.Map;
 public class LoginController {
 
     @Getter
-    private PasswordService passwordService;
+    private final PasswordService passwordService;
 
-    private Map<String, User> users;
+    private final Map<String, User> users;
 
     public LoginController() {
         users = new HashMap<>();
@@ -25,7 +26,7 @@ public class LoginController {
     public Token login(String userName, String password) throws InvalidLoginException {
         if (users.containsKey(userName)) {
             User user = users.get(userName);
-            if(passwordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
+            if (passwordService.verifyPassword(password, user.getPassword(), user.getSalt())) {
                 return new Token(user.getUserName());
             }
         }

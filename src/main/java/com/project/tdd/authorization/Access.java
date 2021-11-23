@@ -1,11 +1,11 @@
-package com.project.tdd;
+package com.project.tdd.authorization;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class Access {
 
-    private HashMap<String, List<String>> access;
+    private final HashMap<String, List<String>> access;
 
     public Access(String resource, List<String> accessRights) {
         access = new HashMap<>();
@@ -13,7 +13,7 @@ public class Access {
     }
 
     public List<String> getAccess(String resource) {
-        if(access.containsKey(resource)){
+        if (access.containsKey(resource)) {
             return access.get(resource);
         }
         return List.of("No access");

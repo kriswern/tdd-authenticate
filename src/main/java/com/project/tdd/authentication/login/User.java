@@ -1,4 +1,4 @@
-package com.project.tdd;
+package com.project.tdd.authentication.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

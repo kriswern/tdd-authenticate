@@ -1,4 +1,4 @@
-package com.project.tdd;
+package com.project.tdd.authentication.token;
 
 import java.time.Instant;
 
@@ -8,9 +8,9 @@ public class TokenService {
     }
 
     public boolean validateToken(Token token) {
-        if(token.isExpired()) {
+        if (token.isExpired()) {
             return false;
-        } else if(Instant.now().isAfter(token.getExpires())){
+        } else if (Instant.now().isAfter(token.getExpires())) {
             token.setExpired(true);
             return false;
         } else {

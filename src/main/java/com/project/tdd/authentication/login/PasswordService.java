@@ -1,8 +1,10 @@
-package com.project.tdd;
+package com.project.tdd.authentication.login;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Optional;
@@ -10,9 +12,21 @@ import java.util.Optional;
 public class PasswordService {
 
     private final SecureRandom RAND = new SecureRandom();
-    private final int ITERATIONS = 2;
-    private final int KEY_LENGTH = 512;
-    private final String ALGORITHM = "PBKDF2WithHmacSHA512"; //SHA512 is longest possible
+    private final int ITERATIONS;
+    private final int KEY_LENGTH;
+    private final String ALGORITHM;
+
+    public PasswordService() {
+        this.ITERATIONS = 2;
+        this.KEY_LENGTH = 512;
+        this.ALGORITHM = "PBKDF2WithHmacSHA512";
+    }
+
+    public PasswordService(String ALGORITHM) {
+        this.ALGORITHM = ALGORITHM;
+        this.ITERATIONS = 2;
+        this.KEY_LENGTH = 512;
+    }
 
     public Optional<String> generateSalt(final int length) {
         if (length < 1) {
@@ -40,7 +54,7 @@ public class PasswordService {
             byte[] securePassword = factory.generateSecret(spec).getEncoded();
 
             return Optional.of(Base64.getEncoder().encodeToString(securePassword));
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
             return Optional.empty();
         } finally {

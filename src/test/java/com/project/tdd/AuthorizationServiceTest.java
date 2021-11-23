@@ -1,5 +1,7 @@
 package com.project.tdd;
 
+import com.project.tdd.authentication.token.Token;
+import com.project.tdd.authorization.AuthorizationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +30,10 @@ public class AuthorizationServiceTest {
         assertNotEquals(List.of("EXECUTE"), authorizationService.isAuthorized(new Token("anna"), "ACCOUNT"));
         assertNotEquals(List.of("READ"), authorizationService.isAuthorized(new Token("berit"), "ACCOUNT"));
         assertNotEquals(List.of("EXECUTE"), authorizationService.isAuthorized(new Token("kalle"), "ACCOUNT"));
+    }
+
+    @Test
+    void test_not_authorized() {
+        assertEquals(List.of("Not authorized"), authorizationService.isAuthorized(new Token("Karl"), "ACCOUNT"));
     }
 }

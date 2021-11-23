@@ -1,4 +1,4 @@
-package com.project.tdd;
+package com.project.tdd.authentication.login;
 
 public class InvalidLoginException extends Exception {
     public InvalidLoginException() {

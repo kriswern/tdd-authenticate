@@ -1,4 +1,6 @@
-package com.project.tdd;
+package com.project.tdd.authorization;
+
+import com.project.tdd.authentication.token.Token;
 
 import java.util.HashMap;
 import java.util.List;
