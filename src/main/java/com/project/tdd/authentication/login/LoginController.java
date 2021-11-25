@@ -2,10 +2,13 @@ package com.project.tdd.authentication.login;
 
 import com.project.tdd.authentication.token.Token;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class LoginController {
 
     @Getter
@@ -13,9 +16,10 @@ public class LoginController {
 
     private final Map<String, User> users;
 
-    public LoginController() {
+    @Autowired
+    public LoginController(PasswordService passwordService) {
         users = new HashMap<>();
-        passwordService = new PasswordService();
+        this.passwordService = passwordService;
         String salt = passwordService.generateSalt(30).get();
 
         users.put("anna", new User("anna", passwordService.hashPassword("losen", salt).get(), salt));

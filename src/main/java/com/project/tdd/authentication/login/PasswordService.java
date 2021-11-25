@@ -1,5 +1,7 @@
 package com.project.tdd.authentication.login;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -9,6 +11,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Optional;
 
+@Component
 public class PasswordService {
 
     private final SecureRandom RAND = new SecureRandom();

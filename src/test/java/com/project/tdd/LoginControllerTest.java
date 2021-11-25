@@ -2,31 +2,26 @@ package com.project.tdd;
 
 import com.project.tdd.authentication.login.InvalidLoginException;
 import com.project.tdd.authentication.login.LoginController;
-import com.project.tdd.authentication.login.PasswordService;
 import com.project.tdd.authentication.login.User;
 import com.project.tdd.authentication.token.Token;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 public class LoginControllerTest {
 
+    @Autowired
     LoginController loginController;
-    PasswordService passwordService;
-
-    @BeforeEach
-    void setUp() {
-        loginController = new LoginController();
-        passwordService = loginController.getPasswordService();
-    }
 
     @Test
     void test_password_service_not_null() {
-        assertNotNull(passwordService);
+        assertNotNull(loginController.getPasswordService());
     }
 
     @Test
